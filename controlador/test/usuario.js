@@ -294,4 +294,19 @@ it('remover usuario n adm', function(done){
 }); 
 
 
+//remover um usuario que nao existe mais no banco
+
+it('remover usuario inexistente', function(done){
+
+     	chai.request(server)
+		.put('/usuario/delete/'+id1)
+		.end(function(err, resposta){
+			resposta.should.have.status(403);
+			console.log(resposta.body);
+			done();
+		});
+	
+}); 
+
+
 });
