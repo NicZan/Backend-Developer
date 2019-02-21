@@ -40,6 +40,7 @@ it('Novo Usuario', function(done){
 			resposta.should.have.status(200);
 			resposta.body.should.have.property('usuario');
 
+			// o usuario deve possuir as propriedades abaixo
 			resposta.body.usuario.should.have.property('_id');
 			resposta.body.usuario.should.have.property('token');
 			resposta.body.usuario.should.have.property('username');
@@ -47,12 +48,13 @@ it('Novo Usuario', function(done){
 			resposta.body.usuario.should.have.property('userphone');
 			resposta.body.usuario.should.have.property('isadmin');
 
-
+			//e as propriedades devem ser iguais as passadas anteriormente
 			resposta.body.usuario.username.should.be.equal('nicolas');
 			resposta.body.usuario.userage.should.be.equal(26);
 			resposta.body.usuario.userphone.should.be.equal(996181648);
 			resposta.body.usuario.isadmin.should.be.equal(true);
 
+			//salva o id e token para verificação futura
 			token = resposta.body.usuario.token;
 			id = resposta.body.usuario._id;
 
@@ -62,6 +64,7 @@ it('Novo Usuario', function(done){
 
 });
 
+//insere um usuário que não é administrador , para usar no teste de remoção
 
 it('Novo Usuario Nao Adm', function(done){
 
@@ -125,7 +128,7 @@ it('Novo Usuario idade incorreta', function(done){
 
 });
 
-//teste de inserção de um novo usuário com telefone < 8 numeros
+//teste de inserção de um novo usuário com telefone < 8 digitos
 
 it('Novo Usuario telefone incorreto', function(done){
 
@@ -149,8 +152,9 @@ it('Novo Usuario telefone incorreto', function(done){
 });
 
 
+//busca um usuario na base atravez do seu id
 
-it('Pegar usuario pelo Id', function(done){
+it('Buscar usuario pelo Id', function(done){
 
 	chai.request(server)
 		.get('/usuario/id/'+id)
@@ -175,8 +179,9 @@ it('Pegar usuario pelo Id', function(done){
 	});
 });
 
+//busca um usuario na base pelo seu token
 
-it('Pegar usuario pelo token', function(done){
+it('Buscar usuario pelo token', function(done){
 	chai.request(server)
 		.get('/usuario/token/'+token)
 		.end(function(err, resposta){	
@@ -200,6 +205,7 @@ it('Pegar usuario pelo token', function(done){
 	});
 });
 
+//altera os dados do usuario para valores válidos
 
 it('Alterar usuario dados valido', function(done){
 
@@ -239,6 +245,7 @@ it('Alterar usuario dados valido', function(done){
 	
 });
 
+//altera os dados de um usuário para valores inválidos 
 
 it('Alterar usuario  dados invalidos', function(done){
 	var usuarioAlterado = {
@@ -264,7 +271,7 @@ it('Alterar usuario  dados invalidos', function(done){
 
 
 
-//remove usuario pelo id usuario adm nao sera apagado
+//remove usuario pelo id, usuario adm nao sera apagado
 it('remover usuario adm', function(done){
 
 

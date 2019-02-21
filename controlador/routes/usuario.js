@@ -1,7 +1,8 @@
 var routes = require('express').Router();
 var Usuario = require('../models/usuario');
 
-//Rota post, adiciona um novo usuario
+//Rota post, adiciona um novo usuario, verifica se os campos username userage e userphone nao estao vazios 
+//se o usuario possui idade maior que 18 anos e se o numero de telefone tem entre 8 a 12 digitos 
 
 routes.post('/', function(requisicao, resposta){
 	if(!requisicao.body.username || !requisicao.body.userage || 
@@ -27,7 +28,7 @@ routes.post('/', function(requisicao, resposta){
 	});
 }); 
 
-//get pegar um usuario pelo id
+//get retorna um usuario pelo seu id
 
 routes.get('/id/:identificacao', function(requisicao, resposta){
 	if(!requisicao.params.identificacao){
@@ -41,7 +42,7 @@ routes.get('/id/:identificacao', function(requisicao, resposta){
 });
 
 
-//get pega um usuario pelo token
+//get retorna um usuario pelo seu token
 
 routes.get('/token/:token', function(requisicao, resposta){
 	if(!requisicao.params.token){
@@ -108,6 +109,7 @@ routes.put('/delete/:identificacao', function(requisicao, resposta){
 });
 
 
+//valida se os novos dados estao corretos para serem atualizados
 
 function validadados(usuario){
 	if(usuario.userage < 18 || isNaN(usuario.userage)){

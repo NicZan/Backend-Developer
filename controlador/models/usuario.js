@@ -1,4 +1,5 @@
 //atributos da coleção de usuários: name, age, phone, is_admin (diferencia um usuário comum de super usuários).
+//o token é utilizado para algumas verificações de segurança como na auteração de dados de um usuario
 
 var  mongoose = require('mongoose');
 var crypto = require('crypto');
