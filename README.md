@@ -15,10 +15,6 @@ como padrão a api esta configurada para acessar o localhost:27017 para executar
 
 `$ mocha` 
 
-### Teste utilizando o Postman
 
-Minha maquina esta configurada para receber chamados á api na porta 28000:
-
-`$ developers.myddns.me:28000/` 
 
 
